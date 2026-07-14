@@ -2,7 +2,7 @@
 //
 // 用法：
 //
-//	// 1️⃣ 初始化配置（自动创建 data/.env，缺失项自动追加）
+//	// 1️⃣ 初始化配置（自动创建 .env，缺失项自动追加）
 //	//    下标[0]=key, [1]=value, [2+]=多行注释（自动以 # 写入）
 //	env.Init([][]string{
 //		{"CHI_PORT", "9081", "端口"},
@@ -35,12 +35,13 @@ import (
 	"strings"
 )
 
-const fileName = "data/.env"
+// fileName .env 文件路径（程序当前目录）
+const fileName = ".env"
 
 // Init 初始化环境配置系统
 //
 // 核心逻辑：
-// 1. [发现]：检查 data/.env 是否存在，不存在则自动创建。
+// 1. [发现]：检查 .env 是否存在，不存在则自动创建。
 // 2. [对比]：读取现有文件，若参数(Key)已存在，则保持原样
 // 3. [追加]：若参数(Key)缺失，则按顺序在文件尾部追加【注释+配置】。
 //
@@ -51,13 +52,15 @@ const fileName = "data/.env"
 //	- 下标[1]: 默认数值 (如 "9081")
 //	- 下标[2+]: 任意多行注释，将以 # 开头写入文件
 func Init(config [][]string) {
-	// 1. 确保目录存在（创建 data 文件夹）
+	// 确保 .env 所在目录存在
 	dir := filepath.Dir(fileName)
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		err := os.MkdirAll(dir, 0755)
-		if err != nil {
-			fmt.Println("创建目录失败:", err)
-			return
+	if dir != "." {
+		if _, err := os.Stat(dir); os.IsNotExist(err) {
+			err := os.MkdirAll(dir, 0755)
+			if err != nil {
+				fmt.Println("创建目录失败:", err)
+				return
+			}
 		}
 	}
 
