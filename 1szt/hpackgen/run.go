@@ -49,7 +49,7 @@ type Addon struct {
 func Run() {
 	// 1. 初始化固定配置（缺失项自动追加到 data/.env）
 	env.Init([][]string{
-		{"MANIFEST_NAME", "1szt", "服务器名称"},
+		{"MANIFEST_NAME", "1szt", "整合包名称"},
 		{"MANIFEST_AUTHOR", "1szt", "作者"},
 		{"MANIFEST_VERSION", "1szt", "版本号（整合包版本）"},
 		{"MANIFEST_DESCRIPTION", "# 欢迎来到 1szt 服务器\\n\\n感谢你选择加入我们的世界。  \\n交流与反馈请前往 QQ 群：565941634\\n", "整合包描述（使用 \\n 换行）"},

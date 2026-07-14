@@ -4,7 +4,7 @@ import "fmt"
 
 func Run() {
 	fmt.Println("========================================")
-	fmt.Println("          SBCC 控制中心启动！")
+	fmt.Println("          hpackgen 整合包构建工具")
 	fmt.Println("========================================")
 	fmt.Println("正在启动各个模块...")
 }
