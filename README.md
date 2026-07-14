@@ -142,6 +142,14 @@ docker buildx build --target=debian --platform linux/amd64,linux/arm64 -t hpackg
 docker buildx build --target=alpine --platform linux/amd64,linux/arm64 -t hpackgen:alpine .
 ```
 
+运行时挂载数据目录：
+
+```bash
+docker run -d --name hpackgen \
+  -v ${PWD}/data:/data \
+  ghcr.io/你的用户名/hpackgen:latest
+```
+
 ---
 
 ## ✦ GitHub Actions 自动构建

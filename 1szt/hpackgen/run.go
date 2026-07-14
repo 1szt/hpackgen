@@ -15,10 +15,10 @@ import (
 )
 
 // getDataDir 获取数据目录
-// 优先读取 .env 中的 DATA_DIR 配置，默认返回 "data"
+// 优先读取系统环境变量，其次 .env 配置，默认返回 "data"
 // 可用值：data（默认）、.（当前目录）、/绝对路径、相对路径
 func getDataDir() string {
-	dir := env.GetConfig("DATA_DIR")
+	dir := env.Get("DATA_DIR")
 	if dir == "" {
 		return "data"
 	}
@@ -180,15 +180,15 @@ func generateManifest() error {
 	mf := manifestFilePath()
 
 	manifest := Manifest{
-		Name:        env.GetConfig("MANIFEST_NAME"),
-		Author:      env.GetConfig("MANIFEST_AUTHOR"),
-		Version:     resolveVersion(env.GetConfig("MANIFEST_VERSION")),
-		Description: unescapeNewlines(env.GetConfig("MANIFEST_DESCRIPTION")),
-		FileAPI:     env.GetConfig("MANIFEST_FILE_API"),
+		Name:        env.Get("MANIFEST_NAME"),
+		Author:      env.Get("MANIFEST_AUTHOR"),
+		Version:     resolveVersion(env.Get("MANIFEST_VERSION")),
+		Description: unescapeNewlines(env.Get("MANIFEST_DESCRIPTION")),
+		FileAPI:     env.Get("MANIFEST_FILE_API"),
 	}
 
 	// 解析 addons JSON
-	addonsStr := env.GetConfig("MANIFEST_ADDONS")
+	addonsStr := env.Get("MANIFEST_ADDONS")
 	if addonsStr != "" {
 		if err := json.Unmarshal([]byte(addonsStr), &manifest.Addons); err != nil {
 			fmt.Printf("[hpackgen] 解析 addons 失败: %v\n", err)
