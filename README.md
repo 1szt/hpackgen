@@ -181,4 +181,4 @@ hpackgen-win-amd64.exe
 
 ## ✦ 许可
 
-[MIT](LICENSE)
+[Apache-2.0 license](https://github.com/jingxuanwei-com/hpackgen#Apache-2.0-1-ov-file)
